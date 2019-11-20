@@ -55,11 +55,12 @@ usersModule.listUsers()
 console.log(userModule.users)
 */
 
-let postIdCounter; //Should initialize
-let commentIdCounter; //Should initialize
+
                        
 const Tweeter = function () {
     /*Tweeter function scope*/
+    let postIdCounter = 0 
+    let commentIdCounter = 0 
     /*An array with posts. Each post is an objec*/
     const _postArr = [ //Private
         {
@@ -84,10 +85,10 @@ const Tweeter = function () {
     //End of _postArr
 
     /*Continue Tweeter function scope*/
-    generateId = function (Arr) { // Gets array arr with post objects and return a new ID for a new post
-        return 'p' + (_postArr.length() + 1) // Assume p3 always comes after p2 etc. I need to check the assumption. 
-                                             //Maybe I need to change the implementation
-                                             //Also, if it's one line function, then I better use arrow function
+    generatePostId = function (Arr) {        // Gets array arr with post objects and return a new ID for a new post
+        return 'p' + (_postArr.length + 1)   // I Assume p3 always comes after p2 etc. I need to check the assumption. 
+                                             // Maybe I need to change the implementation
+                                             // Also, if it's one line function, then I better use arrow function
     }
 
     /*Continue Tweeter function scope*/
@@ -97,7 +98,7 @@ const Tweeter = function () {
 
     /*Continue Tweeter function scope*/
     addPost = function (newPostText) { //I want to Use _postArr.push(). It's private and that's OK because we are inside the Tweeter function scope
-        const newPostid = generateId(_postArr.)
+        const newPostid = generatePostId(_postArr)
         newPost = {
             text: newPostText,
             id = newPostid,
