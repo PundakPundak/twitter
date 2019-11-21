@@ -29,6 +29,13 @@ Here is what should go inside your Tweeter module:
      that receives a postID and a commentID - you understand what it should do
 */
 
+/*
+When you select something with jQuery you are invoking a function and passing in an argument
+The argument is used to determine what you want to select
+The result of invoking that function is an array of elements and some special jQuery methods
+We can use these methods to manipulate the returned array of elements
+*/
+
 /*Example: Private*/
 /*
 //Add another two users
@@ -55,9 +62,8 @@ usersModule.listUsers()
 console.log(userModule.users)
 */
 
-
-                       
-const Tweeter = function () {
+            
+const TweeterModule = function () {
     /*Tweeter function scope*/
     let postIdCounter = 0 
     let commentIdCounter = 0 
@@ -85,30 +91,51 @@ const Tweeter = function () {
     //End of _postArr
 
     /*Continue Tweeter function scope*/
-    generatePostId = function (Arr) {        // Gets array arr with post objects and return a new ID for a new post
+    const generatePostId = function () {        // Gets array arr with post objects and return a new ID for a new post
         return 'p' + (_postArr.length + 1)   // I Assume p3 always comes after p2 etc. I need to check the assumption. 
                                              // Maybe I need to change the implementation
                                              // Also, if it's one line function, then I better use arrow function
     }
 
     /*Continue Tweeter function scope*/
-    getPosts = function(){ // returns the posts array
+    const getPosts = function (){ // returns the posts array
         return _postArr
     }
 
     /*Continue Tweeter function scope*/
-    addPost = function (newPostText) { //I want to Use _postArr.push(). It's private and that's OK because we are inside the Tweeter function scope
-        const newPostid = generatePostId(_postArr)
+    const addPost = function (newPostText) { //I want to Use _postArr.push(). It's private and that's OK because we are inside the Tweeter function scope
+        const newPostId = generatePostId()
         newPost = {
             text: newPostText,
-            id = newPostid,
+            id: newPostId,
             comments: [] //No comments yet so I put empty array here
         } 
         _postArr.push(newPost)
-    } 
+    }
+
+    const removePost = function () {
+
+    }
+
+    const addComment = function () {
+
+    }
+
+    const removeComment = function () {
+
+    }
+
+    return {
+        generatePostId: generatePostId,
+        getPosts: getPosts,
+        addPost: addPost,
+        removePost: removePost,
+        addComment: addComment,
+        removeComment: removeComment
+    }
 }
 /*Main scope*/
-const tweeter = Tweeter()
+const tweeter = TweeterModule()
 
 tweeter.addPost("This is my own post!")
 console.log(tweeter.getPosts())
