@@ -61,8 +61,8 @@ usersModule.addUser('Narkis')
 usersModule.listUsers()
 console.log(userModule.users)
 */
-let postIdCounter = 0 //Initialize as int type
-let commentIdCounter = 0 //Initialize as int type
+let postIdCounter = 2 //Initialize as int type
+let commentIdCounter = 6 //Initialize as int type
 
 const TweeterModule = function () {
     /*Tweeter function scope*/
@@ -91,54 +91,49 @@ const TweeterModule = function () {
     //End of _postArr
 
     /*Continue Tweeter function scope*/
-    const updatePostIdCounter = function () {  
-        //Take only the number of the last post in _postArr without the 'p'. Cast type to Int type and increment
-        const lastPostId = _postArr[_postArr.length-1].id
-        postIdCounter = lastPostId.substring(1) 
-        postIdCounter++
-    }
-
-    const updateCommentIdCounter = function () {        // Gets array arr with post objects and return a new ID for a new post
-        //return 'c' + (_postArr.comments.length + 1)   // I Assume p3 always comes after p2 etc. I need to check the assumption. 
-                                             // Maybe I need to change the implementation
-                                             // Also, if it's one line function, then I better use arrow functio
-    }
 
     /*Continue Tweeter function scope*/
     const getPosts = function (){ // returns the posts array
         return _postArr
     }
+    
+    function myFunction() {
+      document.getElementById("demo").innerHTML = ages.find(checkAdult);
+    }
 
     /*Continue Tweeter function scope*/
     const addPost = function (newPostText) { //I want to Use _postArr.push(). It's private and that's OK because we are inside the Tweeter function scope        
-        
-        updatePostIdCounter()
 
+        postIdCounter++ //Increment because we add a new post
         newPost = {
-            
-            text: newPostText,
             id: 'p' + postIdCounter, 
+            text: newPostText,
             comments: [] //No comments yet so I put empty array here
         } 
         _postArr.push(newPost)
     }
 
     const removePost = function (postId) {
-        const IndexToRemove = _postArr.findIndex( post => post.id == postId );
-        _postArr.splice(IndexToRemove,1)
+        const indexToRemove = _postArr.findIndex( post => post.id == postId ); //Finds index in _postArr with a certain post ID
+        _postArr.splice(indexToRemove,1)
     }
 
-    const addComment = function () {
+    const addComment = function (commentText, postId) {
+
+        commentIdCounter++ //Increment because we add a new comment
+        newComment = {
+            id: 'c' + commentIdCounter, comments: commentText } 
+        _postArr.find(post => post.id == postId).comments.push(newComment)
 
     }
 
-    const removeComment = function () {
-
+    const removeComment = function (postId, commentId) {
+        const postIndex= _postArr.findIndex( post => post.id == postId ); //Finds index in _postArr with a certain post ID
+        const commentIndexToRemove = _postArr[postIndex].comments.findIndex( comment => comment.id == commentId ); //Find index in the relevant post comments array, which is _postArr[postIndex].comments , with a certain comment ID
+        _postArr[postIndex].comments.splice( commentIndexToRemove ,1)
     }
 
     return {
-        updatePostIdCounter: updatePostIdCounter,
-        updateCommentIdCounter: updateCommentIdCounter,
         getPosts: getPosts,
         addPost: addPost,
         removePost: removePost,
