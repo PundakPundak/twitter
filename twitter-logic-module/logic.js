@@ -61,14 +61,14 @@ usersModule.addUser('Narkis')
 usersModule.listUsers()
 console.log(userModule.users)
 */
+let postIdCounter = 0 //Initialize as int type
+let commentIdCounter = 0 //Initialize as int type
 
-            
 const TweeterModule = function () {
     /*Tweeter function scope*/
-    let postIdCounter = 0 
-    let commentIdCounter = 0 
+    
     /*An array with posts. Each post is an objec*/
-    const _postArr = [ //Private
+    const _postArr = [ //Initialization. _postArr is Private
         {
             id: "p1",
             text: "First post!",
@@ -91,10 +91,17 @@ const TweeterModule = function () {
     //End of _postArr
 
     /*Continue Tweeter function scope*/
-    const generatePostId = function () {        // Gets array arr with post objects and return a new ID for a new post
-        return 'p' + (_postArr.length + 1)   // I Assume p3 always comes after p2 etc. I need to check the assumption. 
+    const updatePostIdCounter = function () {  
+        //Take only the number of the last post in _postArr without the 'p'. Cast type to Int type and increment
+        const lastPostId = _postArr[_postArr.length-1].id
+        postIdCounter = lastPostId.substring(1) 
+        postIdCounter++
+    }
+
+    const updateCommentIdCounter = function () {        // Gets array arr with post objects and return a new ID for a new post
+        //return 'c' + (_postArr.comments.length + 1)   // I Assume p3 always comes after p2 etc. I need to check the assumption. 
                                              // Maybe I need to change the implementation
-                                             // Also, if it's one line function, then I better use arrow function
+                                             // Also, if it's one line function, then I better use arrow functio
     }
 
     /*Continue Tweeter function scope*/
@@ -103,18 +110,22 @@ const TweeterModule = function () {
     }
 
     /*Continue Tweeter function scope*/
-    const addPost = function (newPostText) { //I want to Use _postArr.push(). It's private and that's OK because we are inside the Tweeter function scope
-        const newPostId = generatePostId()
+    const addPost = function (newPostText) { //I want to Use _postArr.push(). It's private and that's OK because we are inside the Tweeter function scope        
+        
+        updatePostIdCounter()
+
         newPost = {
+            
             text: newPostText,
-            id: newPostId,
+            id: 'p' + postIdCounter, 
             comments: [] //No comments yet so I put empty array here
         } 
         _postArr.push(newPost)
     }
 
-    const removePost = function () {
-
+    const removePost = function (postId) {
+        const IndexToRemove = _postArr.findIndex( post => post.id == postId );
+        _postArr.splice(IndexToRemove,1)
     }
 
     const addComment = function () {
@@ -126,7 +137,8 @@ const TweeterModule = function () {
     }
 
     return {
-        generatePostId: generatePostId,
+        updatePostIdCounter: updatePostIdCounter,
+        updateCommentIdCounter: updateCommentIdCounter,
         getPosts: getPosts,
         addPost: addPost,
         removePost: removePost,
