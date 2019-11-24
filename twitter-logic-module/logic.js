@@ -96,10 +96,6 @@ const TweeterModule = function () {
     const getPosts = function (){ // returns the posts array
         return _postArr
     }
-    
-    function myFunction() {
-      document.getElementById("demo").innerHTML = ages.find(checkAdult);
-    }
 
     /*Continue Tweeter function scope*/
     const addPost = function (newPostText) { //I want to Use _postArr.push(). It's private and that's OK because we are inside the Tweeter function scope        
@@ -142,6 +138,8 @@ const TweeterModule = function () {
     }
 }
 /*Main scope*/
+/*  TEST CODE    */
+/*
 const tweeter = TweeterModule()
 
 tweeter.addPost("This is my own post!")
@@ -175,3 +173,5 @@ tweeter.removeComment("p2", "c6")
 console.log(tweeter.getPosts())
 //This comment should be removed:
 //{id: "c6", text: "
+*/
+/* End of TEST CODE */
