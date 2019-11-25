@@ -33,17 +33,17 @@ const RendererModule = function () {
     const renderPosts = function (posts) {
         $('#posts').empty()
         for (let post of posts) {
-            $('#posts').append('<div data-id="' + post.id + '" class="post" > ' + post.text + ' </div>')
+            $('#posts').append(`<div data-id = "${post.id}" class="post" >${post.text}</div>`)
             addComments(post)
         }
     }
     const addComments = function (post) {
         comments = post.comments
         if (comments.length >= 1) {
-            $('#posts').append('<p> Comments: </p>') //Check how to make <p> a child of <posts> (In the DOM traversal lessons)
+            $(`[data-id=${post.id}]`).append('<p> Comments: </p>') //Check how to make <p> a child of <posts> (In the DOM traversal lessons)
         }
         for (let comment of comments) {
-            $('#posts').append('<div data-id="' + comment.id + '" class="comment" > ' + comment.text + ' </div>') //Check how to make <div> a child of <posts> (In the DOM traversal lessons)
+            $(`[data-id=${post.id}]`).append('<div data-id="' + comment.id + '" class="comment" > ' + comment.text + ' </div>') //Check how to make <div> a child of <posts> (In the DOM traversal lessons)
         } 
     }
     return {
@@ -57,6 +57,7 @@ const tweeter = TweeterModule()
 const renderer = RendererModule()
 renderer.renderPosts( tweeter.getPosts() )
 console.log( tweeter.getPosts() )
+
 
 //============================
 //Stop here
