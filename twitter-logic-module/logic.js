@@ -61,14 +61,15 @@ usersModule.addUser('Narkis')
 usersModule.listUsers()
 console.log(userModule.users)
 */
-let postIdCounter = 2 //Initialize as int type
-let commentIdCounter = 6 //Initialize as int type
+
 
 const TweeterModule = function () {
     /*Tweeter function scope*/
-    
+    let postIdCounter = 0 //Initialize as int type
+    let commentIdCounter = 0 //Initialize as int type
     /*An array with posts. Each post is an objec*/
-    const _postArr = [ //Initialization. _postArr is Private
+    const _postArr = []
+    /*
         {
             id: "p1",
             text: "First post!",
@@ -89,6 +90,7 @@ const TweeterModule = function () {
         }
     ]
     //End of _postArr
+    */
 
     /*Continue Tweeter function scope*/
 

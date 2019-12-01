@@ -18,7 +18,7 @@ body{
     color: #3498db;
 }
 
-#input{
+#post-input{
     grid-area: i;
     padding: 10px;
     font-size: 1.5vw;
@@ -53,6 +53,15 @@ body{
 
 .post-text{
     font-weight: bold;
+}
+
+#comment-input{
+    padding: 10px;
+    font-size: 1.5vw;
+}
+
+#comment{
+
 }
 
 .comments{

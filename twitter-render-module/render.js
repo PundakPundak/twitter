@@ -33,18 +33,27 @@ const RendererModule = function () {
     const renderPosts = function (posts) {
         $('#posts').empty()
         for (let post of posts) {
-            $('#posts').append(`<div data-id = "${post.id}" class="post" >${post.text}</div>`)
+            $('#posts').append(`<div data-id = "${post.id}" class="post"><p class = post-text >${post.text}<p/></div>`)
             addComments(post)
+            $(`[data-id=${post.id}]`).append(`<input type="text" placeholder="Got something to say?" id="comment-input">`)
+            $(`[data-id=${post.id}]`).append(`<button type="button" id = "comment" >Comment</button>`)
+            $(`[data-id=${post.id}]`).append(`<button class = "delete">Delete Post</button>`)
         }
     }
     const addComments = function (post) {
         comments = post.comments
+        /*
         if (comments.length >= 1) {
             $(`[data-id=${post.id}]`).append('<p> Comments: </p>') //Check how to make <p> a child of <posts> (In the DOM traversal lessons)
         }
+        */
         for (let comment of comments) {
+            //Add delete comment icon (class = "delete-comment")
+            $(`[data-id=${post.id}]`).append(`<i class = "delete-comment"></i>`)
             $(`[data-id=${post.id}]`).append(`<div data-id = "${comment.id}" class="comment" >${comment.text}</div>`) //Check how to make <div> a child of <posts> (In the DOM traversal lessons)
-        } 
+        }
+        
+        
     }
     return {
         renderPosts: renderPosts //Not exposing any other function
