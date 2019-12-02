@@ -43,18 +43,30 @@ $(`#post`).on("click", function() {
     }
     $(`#post-input`).val("What's on your mind?")
 })
-$("#posts").on("click", ".delete", function() {
-    let postIdToRemove = $(this).closest(".post").data().id
+
+$(`#posts`).on("click", ".delete", function() {
+    const postIdToRemove = $(this).closest(`.post`).data().id
     tweeter.removePost(postIdToRemove)
     renderer.renderPosts(tweeter.getPosts())
 })
 
-/*
-$(`#comment`).on("click", function() {
-    const comment = $(`#comment-input`).val() //Requires DOM traversal
+
+$(`#posts`).on("click", ".comment",function() {
+    const postId = $(this).closest(`.post`).data().id
+    const comment = $(this).closest(`.post`).find(`.comment-input`).val() 
     if (comment) {
-        tweeter.addComment(//post) //Requires DOM traversal
+        tweeter.addComment(comment, postId)
         renderer.renderPosts(tweeter.getPosts())
     } 
+    $(this).closest(".post").find(`comment-input`).val("Got something to say?")
 })
-*/
+
+$(`#posts`).on("click", ".delete-comment" , function() {
+    const postId = $(this).closest(`.post`).data().id
+    const commentId = $(this).closest(`div`).find(`.comments`).data().id
+    tweeter.removeComment(postId, commentId)
+    renderer.renderPosts(tweeter.getPosts())
+})
+
+
+

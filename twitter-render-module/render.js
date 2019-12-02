@@ -35,8 +35,8 @@ const RendererModule = function () {
         for (let post of posts) {
             $('#posts').append(`<div data-id = "${post.id}" class="post"><p class = post-text >${post.text}<p/></div>`)
             addComments(post)
-            $(`[data-id=${post.id}]`).append(`<input type="text" placeholder="Got something to say?" id="comment-input">`)
-            $(`[data-id=${post.id}]`).append(`<button type="button" id = "comment" >Comment</button>`)
+            $(`[data-id=${post.id}]`).append(`<input type="text" placeholder="Got something to say?" class="comment-input">`)
+            $(`[data-id=${post.id}]`).append(`<button type="button" class = "comment" >Comment</button>`)
             $(`[data-id=${post.id}]`).append(`<button class = "delete">Delete Post</button>`)
         }
     }
@@ -49,8 +49,13 @@ const RendererModule = function () {
         */
         for (let comment of comments) {
             //Add delete comment icon (class = "delete-comment")
-            $(`[data-id=${post.id}]`).append(`<i class = "delete-comment"></i>`)
-            $(`[data-id=${post.id}]`).append(`<div data-id = "${comment.id}" class="comment" >${comment.text}</div>`) //Check how to make <div> a child of <posts> (In the DOM traversal lessons)
+            const commentDiv = $(`[data-id=${post.id}]`).append(`<div></div>`)
+            commentDiv.append(`<i class = "delete-comment">X</i>`)
+            commentDiv.append(`<div data-id = "${comment.id}" class="comments" >${comment.text}</div>`)
+            //$(`[data-id=${post.id}]`).append(`<i class = "delete-comment">X</i>`)
+            //$(`[data-id=${post.id}]`).append(`<div data-id = "${comment.id}" class="comments" >${comment.text}</div>`)
+
+            
         }
         
         

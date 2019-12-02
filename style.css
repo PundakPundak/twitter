@@ -55,13 +55,9 @@ body{
     font-weight: bold;
 }
 
-#comment-input{
+.comment-input{
     padding: 10px;
     font-size: 1.5vw;
-}
-
-#comment{
-
 }
 
 .comments{

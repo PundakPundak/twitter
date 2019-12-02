@@ -120,7 +120,7 @@ const TweeterModule = function () {
 
         commentIdCounter++ //Increment because we add a new comment
         newComment = {
-            id: 'c' + commentIdCounter, comments: commentText } 
+            id: 'c' + commentIdCounter, text: commentText } 
         _postArr.find(post => post.id == postId).comments.push(newComment)
 
     }
